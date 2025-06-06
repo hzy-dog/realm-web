@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  realm-web:
+    build: .
+    container_name: realm-web
+    ports:
+      - "7655:7655"
+    volumes:
+      - ./realm_config.yaml:/etc/realm/realm_config.yaml
+    restart: unless-stopped

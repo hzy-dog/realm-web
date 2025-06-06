@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Realm 管理界面</title>
+</head>
+<body>
+    <h2>添加转发规则</h2>
+    <form method="POST">
+        协议类型:
+        <select name="protocol">
+            <option value="tcp">TCP</option>
+            <option value="udp">UDP</option>
+        </select><br>
+        监听端口: <input type="text" name="listen_port"><br>
+        目标地址: <input type="text" name="remote_host"><br>
+        目标端口: <input type="text" name="remote_port"><br>
+        <label><input type="checkbox" name="enable_tls"> 启用 TLS</label><br>
+        证书路径: <input name="cert"><br>
+        私钥路径: <input name="key"><br>
+        <input type="submit" value="添加">
+    </form>
+
+    <h3>当前配置：</h3>
+    <pre>{{ config | tojson(indent=2) }}</pre>
+
+    <h3>删除规则：</h3>
+    <ul>
+        {% for inb in config.inbounds %}
+            <li>{{ inb.tag }} <a href="/delete/{{ inb.tag }}">[删除]</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
